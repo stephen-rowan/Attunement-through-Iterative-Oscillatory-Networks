@@ -1,0 +1,33 @@
+# Attunement-through-Iterative-Oscillatory-Networks Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-11-13
+
+## Active Technologies
+- Python 3.11+ (Streamlit requires 3.8+, 3.11+ recommended per constitution) + Streamlit (web framework), Plotly (visualization), NumPy (numerical computations) (001-aion-simulation)
+- N/A (in-memory simulation state, no persistence required) (001-aion-simulation)
+
+- Python 3.11+ (Streamlit requires Python 3.8+, 3.11+ recommended for performance) + Streamlit (web framework), Plotly (visualization - see research.md for rationale), NumPy (numerical computations) (001-aion-simulation)
+
+## Project Structure
+
+```text
+backend/
+frontend/
+tests/
+```
+
+## Commands
+
+cd src [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLOGIES] pytest [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLOGIES] ruff check .
+
+## Code Style
+
+Python 3.11+ (Streamlit requires Python 3.8+, 3.11+ recommended for performance): Follow standard conventions
+
+## Recent Changes
+- 001-aion-simulation: Added Python 3.11+ (Streamlit requires 3.8+, 3.11+ recommended per constitution) + Streamlit (web framework), Plotly (visualization), NumPy (numerical computations)
+
+- 001-aion-simulation: Added Python 3.11+ (Streamlit requires Python 3.8+, 3.11+ recommended for performance) + Streamlit (web framework), Plotly (visualization - see research.md for rationale), NumPy (numerical computations)
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
