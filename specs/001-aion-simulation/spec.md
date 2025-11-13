@@ -5,6 +5,16 @@
 **Status**: Draft  
 **Input**: User description: "Build an interactive Streamlit-based educational simulation of the AION (Attunement through Iterative Oscillatory Networks) model — a quantum-inspired neural architecture where meaning emerges through phase synchronization among coupled oscillators. Implement a Kuramoto-style oscillator network where each node has a phase and intrinsic frequency, and resonance arises via iterative coupling updates. Include two live-updating visualizations: (1) a dynamic 2D unit-circle plot showing oscillators rotating and clustering as they synchronize, and (2) a real-time line chart showing the resonance index (R) rising over time. Provide user-adjustable parameters for number of oscillators (N), coupling strength (K), time step (Δt), and animation speed, along with concise educational explanations of key terms (oscillator, phase, resonance, attunement). Ensure a clean, visually engaging layout, responsive interactivity, and clear learning outcomes linking AION dynamics to concepts in synchronization, energy minimization, and neuro-symbolic binding."
 
+## Clarifications
+
+### Session 2025-01-27
+
+- Q: Should the simulation include user controls for pausing/resuming or resetting, or should it auto-start and run continuously? → A: Include pause/resume and reset controls
+- Q: When the simulation is paused, should users be able to adjust parameters, and if so, when should changes take effect? → A: Allow parameter changes while paused, apply on resume
+- Q: What is the exact mathematical formula for calculating the resonance index (R)? → A: Standard Kuramoto order parameter: R = |(1/N) Σ e^(iθ_j)|
+- Q: What is the exact phase update equation used for oscillator dynamics? → A: Standard Kuramoto: dθ_j/dt = ω_j + (K/N) Σ sin(θ_k - θ_j)
+- Q: How should intrinsic frequencies (ω_j) be distributed among oscillators? → A: Random uniform distribution over a specified range
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Run and Observe AION Simulation (Priority: P1)
@@ -18,10 +28,13 @@ A learner opens the simulation application and immediately sees an active visual
 **Acceptance Scenarios**:
 
 1. **Given** the application is launched, **When** the page loads, **Then** the simulation automatically starts running with default parameters, showing oscillators on the unit circle and a resonance index chart
-2. **Given** the simulation is running, **When** time progresses, **Then** oscillators rotate around the unit circle at their intrinsic frequencies
-3. **Given** oscillators are rotating, **When** coupling strength is sufficient, **Then** oscillators gradually cluster together, showing phase synchronization
-4. **Given** synchronization is occurring, **When** time progresses, **Then** the resonance index (R) increases over time on the line chart
-5. **Given** the simulation is running, **When** oscillators synchronize, **Then** the unit circle visualization shows clear clustering patterns
+2. **Given** the simulation is running, **When** the user clicks pause, **Then** the simulation stops updating and visualizations freeze at the current state
+3. **Given** the simulation is paused, **When** the user clicks resume, **Then** the simulation continues from the frozen state with any parameter changes made during pause now applied
+4. **Given** the simulation is running or paused, **When** the user clicks reset, **Then** the simulation restarts with the current parameter values, reinitializing oscillators with random phases and frequencies, and clearing the resonance index history
+5. **Given** the simulation is running, **When** time progresses, **Then** oscillators rotate around the unit circle at their intrinsic frequencies
+6. **Given** oscillators are rotating, **When** coupling strength is sufficient, **Then** oscillators gradually cluster together, showing phase synchronization
+7. **Given** synchronization is occurring, **When** time progresses, **Then** the resonance index (R) increases over time on the line chart
+8. **Given** the simulation is running, **When** oscillators synchronize, **Then** the unit circle visualization shows clear clustering patterns
 
 ---
 
@@ -40,6 +53,7 @@ A learner wants to understand how different parameters affect synchronization be
 3. **Given** the simulation is running, **When** the user changes the time step (Δt), **Then** the simulation updates at the new rate, affecting both the smoothness of animation and computational speed
 4. **Given** the simulation is running, **When** the user adjusts animation speed, **Then** the visual update rate changes without affecting the underlying simulation time step
 5. **Given** parameters are changed, **When** the simulation updates, **Then** the resonance index chart continues to track the new dynamics accurately
+6. **Given** the simulation is paused, **When** the user adjusts any parameter, **Then** the parameter value updates but visualizations remain frozen until resume
 
 ---
 
@@ -70,14 +84,16 @@ A learner encounters unfamiliar terms like "oscillator," "phase," "resonance," o
 - What happens when animation speed is set to maximum? (Visualization should update smoothly without lag or frame drops)
 - How does the system handle rapid parameter changes? (Updates should be responsive without causing visual glitches or calculation errors)
 - What happens if the simulation runs for a very long time? (Resonance index should plateau or stabilize, and visualization should remain clear)
+- What happens when the user pauses the simulation? (Visualizations freeze at current state, calculations stop, controls remain accessible)
+- What happens when the user resets the simulation? (Oscillators reinitialize with random phases/frequencies, resonance index history clears, simulation restarts with current parameters)
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
 - **FR-001**: System MUST implement a Kuramoto-style oscillator network where each oscillator has a phase and intrinsic frequency
-- **FR-002**: System MUST update oscillator phases iteratively based on coupling interactions between oscillators
-- **FR-003**: System MUST calculate and display a resonance index (R) that measures the degree of phase synchronization
+- **FR-002**: System MUST update oscillator phases iteratively based on coupling interactions between oscillators using the standard Kuramoto equation: dθ_j/dt = ω_j + (K/N) Σ sin(θ_k - θ_j), where θ_j is the phase of oscillator j, ω_j is its intrinsic frequency, K is coupling strength, and N is the number of oscillators
+- **FR-003**: System MUST calculate and display a resonance index (R) that measures the degree of phase synchronization using the standard Kuramoto order parameter: R = |(1/N) Σ e^(iθ_j)|
 - **FR-004**: System MUST provide a dynamic 2D unit-circle visualization showing oscillators as points rotating around a circle
 - **FR-005**: System MUST update the unit-circle visualization in real-time as oscillators move and cluster
 - **FR-006**: System MUST provide a real-time line chart showing the resonance index (R) over time
@@ -89,16 +105,19 @@ A learner encounters unfamiliar terms like "oscillator," "phase," "resonance," o
 - **FR-012**: System MUST explain how AION dynamics relate to synchronization, energy minimization, and neuro-symbolic binding concepts
 - **FR-013**: System MUST maintain responsive interactivity - parameter changes must reflect in visualizations within 1 second
 - **FR-014**: System MUST ensure visualizations update smoothly without noticeable lag or stuttering
-- **FR-015**: System MUST initialize oscillators with random phases and intrinsic frequencies when the simulation starts
+- **FR-015**: System MUST initialize oscillators with random phases (uniformly distributed on [0, 2π]) and intrinsic frequencies (uniformly distributed over a specified range, e.g., [-1, 1] or [0, 2]) when the simulation starts
 - **FR-016**: System MUST handle parameter value validation to prevent invalid inputs (e.g., negative numbers, zero for certain parameters)
+- **FR-017**: System MUST provide a pause/resume control that allows users to stop and resume simulation execution
+- **FR-018**: System MUST provide a reset control that restarts the simulation with current parameter values, reinitializing oscillators and clearing the resonance index history
+- **FR-019**: System MUST allow parameter adjustments while the simulation is paused, with changes taking effect when the simulation resumes
 
 ### Key Entities
 
-- **Oscillator**: Represents a single node in the AION network. Each oscillator has a phase (angular position) and an intrinsic frequency (natural rotation rate). Oscillators interact through coupling to achieve synchronization.
+- **Oscillator**: Represents a single node in the AION network. Each oscillator has a phase (angular position, initialized uniformly on [0, 2π]) and an intrinsic frequency (natural rotation rate, initialized from a uniform distribution over a specified range). Oscillators interact through coupling to achieve synchronization. Phase evolution follows the Kuramoto equation: dθ_j/dt = ω_j + (K/N) Σ sin(θ_k - θ_j), where all oscillators are coupled to all others (all-to-all coupling).
 
 - **Simulation State**: Captures the current state of all oscillators at a given time, including their phases and the calculated resonance index. This state evolves over time through iterative updates.
 
-- **Resonance Index (R)**: A quantitative measure ranging from 0 to 1 that indicates the degree of phase synchronization among oscillators. R = 0 means complete desynchronization, R = 1 means perfect synchronization.
+- **Resonance Index (R)**: A quantitative measure ranging from 0 to 1 that indicates the degree of phase synchronization among oscillators. Calculated using the standard Kuramoto order parameter: R = |(1/N) Σ e^(iθ_j)|, where N is the number of oscillators, θ_j is the phase of oscillator j, and i is the imaginary unit. R = 0 means complete desynchronization, R = 1 means perfect synchronization.
 
 - **Visualization Data**: The processed data required to render the unit-circle plot (oscillator positions) and the resonance index chart (time series of R values).
 
