@@ -260,9 +260,39 @@ The AION model's phase coupling mechanism has potential applications in AI syste
 #### How It Would Work
 
 1. **Representation**: Map embeddings/vectors to oscillator phases (e.g., use embedding angles or projections)
-2. **Coupling**: Define coupling strength based on similarity, relevance, or learned relationships
-3. **Synchronization**: Let phases align through Kuramoto dynamics
-4. **Emergent Meaning**: Use synchronized clusters as coherent representations for retrieval or generation
+2. **Frequency Assignment**: Assign intrinsic frequencies to documents representing their baseline importance or relevance
+3. **Coupling**: Define coupling strength based on similarity, relevance, or learned relationships
+4. **Synchronization**: Let phases align through Kuramoto dynamics
+5. **Emergent Meaning**: Use synchronized clusters as coherent representations for retrieval or generation
+
+#### Frequency in RAG Context
+
+When nodes represent documents in a RAG system, **frequency (ω)** takes on a specific meaning:
+
+**What Frequency Represents:**
+- **Intrinsic Relevance/Importance**: A document's baseline importance or relevance score that exists independently of queries or other documents
+- **Query-Independent Activity**: How "active" or prominent a document is in the knowledge base
+- **Domain-Specific Centrality**: How central a document is to its domain
+
+**Possible Interpretations:**
+- **Citation-based**: Documents with more citations have higher frequency
+- **Recency-based**: More recent documents have higher frequency
+- **Authority-based**: Documents from authoritative sources have higher frequency
+- **Learned Importance**: Frequency learned from usage patterns or relevance feedback
+
+**How It Works:**
+- Each document gets an intrinsic frequency (ω) representing its baseline importance
+- Documents with higher frequency have more "influence" in the synchronization process
+- Phase coupling still aligns documents based on semantic similarity
+- Synchronization clusters semantically similar documents, with important documents having more weight
+- Documents with different importance levels can still synchronize if semantically similar
+
+**Example:**
+- Document A (high frequency, ω=2.0): Important research paper with many citations
+- Document B (low frequency, ω=0.5): Supporting material or less authoritative source
+- With coupling: They can still synchronize if semantically similar, but the important document has more influence in the cluster
+
+In RAG systems, frequency represents each document's **intrinsic importance or relevance**, independent of queries or other documents, while phase coupling handles the **interactions and synchronization** between documents.
 
 #### Other AI Applications
 
