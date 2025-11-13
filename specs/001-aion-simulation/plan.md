@@ -7,70 +7,117 @@
 
 ## Summary
 
-Build an interactive Streamlit-based educational simulation of the AION (Attunement through Iterative Oscillatory Networks) model. The simulation implements a Kuramoto-style oscillator network where meaning emerges through phase synchronization among coupled oscillators. The application provides real-time visualizations (unit-circle plot and resonance index chart), interactive parameter controls, and educational explanations of key concepts.
+Build an interactive Streamlit-based educational simulation of the AION (Attunement through Iterative Oscillatory Networks) model — a quantum-inspired neural architecture where meaning emerges through phase synchronization among coupled oscillators. Implement a Kuramoto-style oscillator network with real-time visualizations (unit circle plot and resonance index chart), user-adjustable parameters, and educational explanations. Technical approach: Python 3.11+ with Streamlit for UI, Plotly for visualizations, NumPy for numerical computations, pytest for testing.
 
 ## Technical Context
 
-**Language/Version**: Python 3.11+ (Streamlit requires Python 3.8+, 3.11+ recommended for performance)  
-**Primary Dependencies**: Streamlit (web framework), Plotly (visualization - see research.md for rationale), NumPy (numerical computations)  
-**Storage**: N/A (stateless simulation, no persistence required)  
-**Testing**: pytest (unit tests for core logic), Streamlit testing utilities (integration tests for UI components)  
-**Target Platform**: Web browser (desktop/laptop focus, modern browsers)  
-**Project Type**: web (single-page Streamlit application)  
-**Performance Goals**: 10+ frames per second for animation updates with up to 100 oscillators, parameter changes reflected within 1 second, smooth visualization updates without stuttering  
-**Constraints**: Real-time computation of Kuramoto equations for N oscillators (all-to-all coupling = O(N²) per time step), client-side or server-side execution with acceptable latency, memory efficient for up to 1000 oscillators  
-**Scale/Scope**: Single-user educational tool, single-page application, ~500-1000 lines of code estimated
+**Language/Version**: Python 3.11+ (Streamlit requires 3.8+, 3.11+ recommended per constitution)  
+**Primary Dependencies**: Streamlit (web framework), Plotly (visualization), NumPy (numerical computations)  
+**Storage**: N/A (in-memory simulation state, no persistence required)  
+**Testing**: pytest for unit tests, Streamlit testing utilities for integration tests  
+**Target Platform**: Web browser (Streamlit web application, desktop/laptop focus)  
+**Project Type**: Single project (web application)  
+**Performance Goals**: 
+- Real-time visualization updates: 10+ frames per second for up to 100 oscillators (per SC-003)
+- Simulation update: < 100ms for N=100 oscillators (per contracts/module-interfaces.md)
+- Parameter change response: < 1 second (per SC-002)  
+**Constraints**: 
+- Real-time visualization updates without noticeable lag
+- Responsive interactivity (parameter changes reflect within 1 second)
+- Handle up to 1000 oscillators gracefully (practical limit for performance)
+- Numerical stability for Kuramoto equation calculations  
+**Scale/Scope**: 
+- Single-page Streamlit application
+- 2 main visualizations (unit circle, resonance chart)
+- 4 user-adjustable parameters (N, K, Δt, animation speed)
+- 4 educational term explanations
+- Target: Educational audience with varying technical backgrounds
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-**Status**: ✅ **CONSTITUTION POPULATED** (v1.0.0, ratified 2025-01-27)
+### I. Test-Driven Development (NON-NEGOTIABLE)
+✅ **PASS**: Plan includes unit tests for core logic (oscillator models, simulation, calculations) and integration tests for UI interactions. Tests will validate mathematical correctness (Kuramoto equations, resonance index calculation) and edge cases (K=0, N=1, etc.) per constitution requirement.
 
-The constitution file at `.specify/memory/constitution.md` defines five core principles:
-- **I. Test-Driven Development (NON-NEGOTIABLE)**: Unit tests for core logic, integration tests for flows
-- **II. Code Quality & Maintainability**: Documentation, separation of concerns, PEP 8 compliance
-- **III. Performance Standards**: < 100ms simulation updates, 10+ fps visualizations
-- **IV. Error Handling & Edge Cases**: Appropriate exceptions, graceful edge case handling
-- **V. Documentation & Educational Value**: Concise, accessible educational content
+### II. Code Quality & Maintainability
+✅ **PASS**: Plan includes clear separation of concerns: models (domain logic), visualization (rendering), UI (Streamlit controls). Module interface contracts defined in `contracts/module-interfaces.md` with docstring requirements. Python PEP 8 style guidelines and type hints will be used.
 
-**Compliance Assessment**:
-- ✅ Testing: Hybrid approach (pytest + Streamlit testing) aligns with Principle I
-- ✅ Code Structure: Domain separation (models/visualization/UI) aligns with Principle II
-- ✅ Performance: Design accounts for O(N²) complexity, vectorization planned (Principle III)
-- ✅ Error Handling: Edge cases documented and planned (Principle IV)
-- ✅ Documentation: Educational content requirements defined (Principle V)
+### III. Performance Standards
+✅ **PASS**: Performance requirements explicitly defined:
+- Simulation updates: < 100ms for N=100 oscillators (per contracts/module-interfaces.md)
+- Visualizations: 10+ frames per second for up to 100 oscillators (per SC-003)
+- Parameter response: < 1 second (per SC-002)
+- NumPy vectorization will be used for O(N²) coupling calculations per constitution recommendation
 
-**Post-Design Re-evaluation** (Phase 1 Complete):
+### IV. Error Handling & Edge Cases
+✅ **PASS**: Plan includes handling of all edge cases identified in spec.md:
+- N=1, K=0, very high K, Δt=0/negative, rapid parameter changes, long simulation runs
+- Module interfaces define appropriate exceptions (ValueError, TypeError) per contracts/module-interfaces.md
+- Clear error messages for invalid parameter inputs
 
-✅ **Design Artifacts Completed**:
-- `research.md`: All technical clarifications resolved (Plotly selected, testing approach defined)
-- `data-model.md`: Complete entity definitions with validation rules and relationships
-- `contracts/`: Module interfaces and data format contracts defined
-- `quickstart.md`: Implementation guide provided
+### V. Documentation & Educational Value
+✅ **PASS**: Educational explanations required for all key terms (oscillator, phase, resonance, attunement) per FR-011. Explanations must be concise and accessible to learners without deep technical background. Code comments will explain mathematical concepts (Kuramoto equation, order parameter) where helpful.
 
-✅ **Design Compliance Assessment**:
-- **Code Structure**: Single-project structure with clear domain separation (models, visualization, UI) - appropriate for scope
-- **Testing Strategy**: Hybrid approach (pytest for core logic, Streamlit testing for UI) - follows best practices
-- **Performance Considerations**: Design accounts for O(N²) coupling complexity, efficient NumPy vectorization planned
-- **Maintainability**: Clear module boundaries, well-defined interfaces, separation of concerns
-- **Documentation**: Comprehensive design artifacts support implementation
+### Technology Stack Compliance
+✅ **PASS**: 
+- Language: Python 3.11+ (matches constitution requirement)
+- Dependencies: Streamlit, Plotly, NumPy (matches constitution specification)
+- Testing: pytest for unit tests, Streamlit testing utilities for integration tests (matches constitution specification)
 
-✅ **Constitution Status**: Constitution v1.0.0 now defines project-specific principles. Design compliance verified above.
+### Performance Requirements Compliance
+✅ **PASS**: All performance requirements from constitution are explicitly addressed:
+- Real-time visualization updates: 10+ fps for up to 100 oscillators ✅
+- Parameter change response: < 1 second ✅
+- Simulation update: < 100ms for N=100 oscillators ✅
 
-**Gate Status**: ✅ **PASS** (constitution compliance verified, design artifacts complete)
+**GATE STATUS**: ✅ **ALL GATES PASS** - No violations. Proceed to Phase 0 research.
+
+### Post-Design Constitution Check (After Phase 1)
+
+*Re-evaluated after completing Phase 1: Design & Contracts*
+
+#### Phase 0 Research Completion
+✅ **PASS**: `research.md` completed with all technical clarifications resolved:
+- Visualization library: Plotly selected (superior Streamlit integration, performance, interactivity)
+- Testing approach: Hybrid approach using pytest for core logic and Streamlit testing utilities for UI
+
+#### Phase 1 Design Artifacts
+✅ **PASS**: All Phase 1 artifacts generated and complete:
+- `data-model.md`: Complete entity definitions (Oscillator, SimulationState, SimulationParameters, VisualizationData, SimulationControlState) with validation rules and relationships
+- `contracts/module-interfaces.md`: Complete module interface contracts with error handling and performance requirements
+- `quickstart.md`: Complete implementation guide with setup, implementation order, and key details
+- Agent context updated: Cursor IDE context file updated with technology stack information
+
+#### Constitution Compliance Verification
+✅ **I. Test-Driven Development**: Module interfaces define testable contracts. `quickstart.md` includes testing strategy with unit and integration test structure.
+
+✅ **II. Code Quality & Maintainability**: Clear separation of concerns defined in project structure. Module interfaces include docstring requirements. Contracts specify type hints and error handling.
+
+✅ **III. Performance Standards**: Performance contracts explicitly defined in `contracts/module-interfaces.md`:
+- `SimulationState.update()`: < 100ms for N=100 oscillators
+- Visualization functions: < 50ms
+- UI controls: < 1 second response time
+
+✅ **IV. Error Handling & Edge Cases**: Module interfaces define ValueError and TypeError exceptions. Edge cases (N=1, K=0, etc.) addressed in data model validation rules.
+
+✅ **V. Documentation & Educational Value**: Educational content requirements specified in module interfaces. `quickstart.md` provides implementation guidance.
+
+**POST-DESIGN GATE STATUS**: ✅ **ALL GATES PASS** - Design phase complete. Ready for Phase 2 (task generation via `/speckit.tasks`).
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```text
-specs/[###-feature]/
+specs/001-aion-simulation/
 ├── plan.md              # This file (/speckit.plan command output)
 ├── research.md          # Phase 0 output (/speckit.plan command)
 ├── data-model.md        # Phase 1 output (/speckit.plan command)
 ├── quickstart.md        # Phase 1 output (/speckit.plan command)
 ├── contracts/           # Phase 1 output (/speckit.plan command)
+│   ├── module-interfaces.md
+│   └── README.md
 └── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
 ```
 
@@ -82,35 +129,41 @@ src/
 │   ├── __init__.py
 │   ├── models/
 │   │   ├── __init__.py
-│   │   ├── oscillator.py      # Oscillator entity and phase update logic
-│   │   └── simulation.py     # Simulation state and Kuramoto equations
+│   │   ├── oscillator.py      # Oscillator class
+│   │   └── simulation.py       # SimulationState class
 │   ├── visualization/
-│   │   ├── __init__.py        # VisualizationData dataclass (per data-model.md)
-│   │   ├── unit_circle.py    # Unit circle plot visualization
-│   │   └── resonance_chart.py # Resonance index time series chart
+│   │   ├── __init__.py
+│   │   ├── unit_circle.py      # Unit circle plot creation
+│   │   └── resonance_chart.py  # Resonance index chart creation
 │   └── ui/
 │       ├── __init__.py
-│       ├── controls.py        # Parameter controls (sliders, buttons)
-│       └── education.py       # Educational content display
-├── app.py                      # Main Streamlit application entry point
-└── config.py                   # Default parameters and configuration
+│       ├── controls.py         # Parameter and simulation controls
+│       └── education.py        # Educational content rendering
+├── app.py                      # Streamlit entry point
+└── config.py                   # Default configuration values
 
 tests/
 ├── unit/
-│   ├── test_oscillator.py     # Oscillator model tests
-│   ├── test_simulation.py     # Simulation logic tests
-│   └── test_kuramoto.py       # Kuramoto equation validation tests
+│   ├── test_oscillator.py      # Oscillator unit tests
+│   └── test_simulation.py      # SimulationState unit tests
 └── integration/
-    └── test_simulation_flow.py # End-to-end simulation flow tests
+    └── test_app.py             # Streamlit app integration tests
 
-requirements.txt                 # Python dependencies
-README.md                        # Project documentation
+requirements.txt                # Python dependencies
 ```
 
-**Structure Decision**: Single project structure (Option 1) chosen because this is a standalone Streamlit web application with no separate frontend/backend split. The `src/aion/` package contains the core simulation logic organized by domain (models, visualization, UI), while `app.py` serves as the Streamlit entry point. This structure supports testability and maintainability while keeping the codebase simple for an educational tool.
+**Structure Decision**: Single project structure (Option 1) selected. This is a Streamlit web application with a clear separation of concerns:
+- `src/aion/models/`: Core domain logic (oscillators, simulation state)
+- `src/aion/visualization/`: Visualization rendering (Plotly figures)
+- `src/aion/ui/`: Streamlit UI components (controls, educational content)
+- `src/app.py`: Main Streamlit entry point that orchestrates the application
+- `tests/`: Unit tests for core logic, integration tests for UI flows
 
 ## Complexity Tracking
 
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
-No violations identified. The single-project structure with clear domain separation (models, visualization, UI) is appropriate for the scope and complexity of this educational simulation tool.
+| Violation | Why Needed | Simpler Alternative Rejected Because |
+|-----------|------------|-------------------------------------|
+| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
