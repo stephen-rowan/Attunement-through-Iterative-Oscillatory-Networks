@@ -1,50 +1,94 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+  SYNC IMPACT REPORT
+  ===================
+  Version Change: [TEMPLATE] → 1.0.0 (MAJOR: Initial constitution adoption)
+  
+  Modified Principles:
+    - N/A (template had no concrete principles)
+  
+  Added Sections:
+    - Core Principles (I-V): Test-Driven Development, Code Quality, Performance Standards, Error Handling, Documentation
+    - Additional Constraints: Technology Stack, Performance Requirements
+    - Development Workflow: Quality Gates, Code Review Requirements
+    - Governance: Constitution Authority, Amendments, Compliance Verification
+  
+  Removed Sections:
+    - Template placeholders [PROJECT_NAME], [PRINCIPLE_X_NAME], etc.
+  
+  Templates Requiring Updates:
+    ✅ plan-template.md: Constitution Check section already present (no changes needed)
+    ✅ spec-template.md: No constitution references (no changes needed)
+    ✅ tasks-template.md: No constitution references (no changes needed)
+  
+  Follow-up TODOs:
+    - None (all placeholders resolved)
+  
+  Date: 2025-01-27
+-->
+
+# Attunement-through-Iterative-Oscillatory-Networks Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Test-Driven Development (NON-NEGOTIABLE)
+**MUST**: All core logic (models, simulation, calculations) must have unit tests written before or alongside implementation. Tests must validate mathematical correctness (Kuramoto equations, resonance index calculation) and edge cases (K=0, N=1, etc.).
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**SHOULD**: Integration tests for end-to-end simulation flows and UI interactions.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Code Quality & Maintainability
+**MUST**: Code must be well-documented with docstrings following module interface contracts. Clear separation of concerns: models (domain logic), visualization (rendering), UI (Streamlit controls).
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**SHOULD**: Follow Python PEP 8 style guidelines. Use type hints for function signatures.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Performance Standards
+**MUST**: Simulation updates must complete in < 100ms for N=100 oscillators (per contracts/module-interfaces.md). Visualizations must update at 10+ frames per second for up to 100 oscillators (per SC-003).
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**SHOULD**: Optimize using NumPy vectorization for O(N²) coupling calculations. Limit resonance_history size for large N to prevent memory issues.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Error Handling & Edge Cases
+**MUST**: All modules must raise appropriate exceptions (ValueError for invalid inputs, TypeError for incorrect types) per contracts/module-interfaces.md. Handle edge cases gracefully: N=1, K=0, very high K, Δt=0/negative, rapid parameter changes, long simulation runs.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**SHOULD**: Provide clear error messages to users for invalid parameter inputs.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Documentation & Educational Value
+**MUST**: Educational explanations must be concise and accessible to learners without deep technical background. All key terms (oscillator, phase, resonance, attunement) must be explained.
+
+**SHOULD**: Code comments should explain mathematical concepts where helpful (e.g., Kuramoto equation, order parameter).
+
+## Additional Constraints
+
+### Technology Stack
+- **Language**: Python 3.11+ (Streamlit requires 3.8+, 3.11+ recommended)
+- **Primary Dependencies**: Streamlit (web framework), Plotly (visualization), NumPy (numerical computations)
+- **Testing**: pytest for unit tests, Streamlit testing utilities for integration tests
+
+### Performance Requirements
+- Real-time visualization updates: 10+ fps for up to 100 oscillators
+- Parameter change response: < 1 second (per SC-002)
+- Simulation update: < 100ms for N=100 oscillators
+
+## Development Workflow
+
+### Quality Gates
+1. **Before Implementation**: Specification analysis complete, tasks.md generated, constitution compliance verified
+2. **During Implementation**: Unit tests pass, integration tests pass, performance benchmarks met
+3. **Before Completion**: All acceptance scenarios from spec.md verified, edge cases handled, documentation complete
+
+### Code Review Requirements
+- Verify compliance with module interface contracts
+- Ensure edge cases are handled
+- Validate performance requirements are met
+- Check educational content accuracy
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+**Constitution Authority**: This constitution supersedes all other development practices. Any deviation must be explicitly justified and documented.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Amendments**: Constitution changes require:
+- Documentation of rationale
+- Impact assessment on existing code
+- Approval process (to be defined by project maintainers)
+
+**Compliance Verification**: All `/speckit.analyze` runs must verify constitution compliance. Violations are automatically CRITICAL and require resolution before proceeding.
+
+**Version**: 1.0.0 | **Ratified**: 2025-01-27 | **Last Amended**: 2025-01-27
