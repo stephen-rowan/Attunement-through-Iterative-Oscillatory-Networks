@@ -88,8 +88,8 @@ This document provides an actionable, dependency-ordered task list for implement
 
 ### Tasks
 
-- [ ] T017 [US1] [P] Implement create_unit_circle_plot function in src/aion/visualization/unit_circle.py that creates Plotly scatter plot with oscillators positioned at (cos(phase), sin(phase)) per contracts/module-interfaces.md
-- [ ] T018 [US1] [P] Implement create_resonance_chart function in src/aion/visualization/resonance_chart.py that creates Plotly line chart with time on X-axis and resonance_index [0,1] on Y-axis per contracts/module-interfaces.md
+- [ ] T017 [P] [US1] Implement create_unit_circle_plot function in src/aion/visualization/unit_circle.py that creates Plotly scatter plot with oscillators positioned at (cos(phase), sin(phase)) per contracts/module-interfaces.md
+- [ ] T018 [P] [US1] Implement create_resonance_chart function in src/aion/visualization/resonance_chart.py that creates Plotly line chart with time on X-axis and resonance_index [0,1] on Y-axis per contracts/module-interfaces.md
 - [ ] T019 [US1] Implement VisualizationData dataclass in src/aion/visualization/__init__.py with unit_circle_data dict and resonance_history list per data-model.md
 - [ ] T020 [US1] Implement SimulationControlState dataclass in src/aion/models/simulation.py with is_running and is_paused boolean fields per data-model.md
 - [ ] T021 [US1] Implement render_simulation_controls function in src/aion/ui/controls.py with pause/resume/reset buttons returning (should_pause, should_resume, should_reset) tuple per contracts/module-interfaces.md
@@ -124,7 +124,7 @@ This document provides an actionable, dependency-ordered task list for implement
 
 ### Tasks
 
-- [ ] T032 [US2] [P] Implement render_parameter_controls function in src/aion/ui/controls.py with Streamlit sliders for num_oscillators [1, 1000], coupling_strength [0, 10], time_step (0, 1], and animation_speed [0.1, 10.0] per contracts/module-interfaces.md
+- [ ] T032 [P] [US2] Implement render_parameter_controls function in src/aion/ui/controls.py with Streamlit sliders for num_oscillators [1, 1000], coupling_strength [0, 10], time_step (0, 1], and animation_speed [0.1, 10.0] per contracts/module-interfaces.md
 - [ ] T033 [US2] Implement parameter validation in src/aion/ui/controls.py to prevent invalid inputs (negative numbers, zero for time_step, etc.) and handle gracefully
 - [ ] T034 [US2] Implement parameter change handling in src/app.py that updates SimulationParameters when user adjusts controls, with immediate effect if running or stored for resume if paused
 - [ ] T035 [US2] Implement num_oscillators change handler in src/app.py that reinitializes SimulationState with new N oscillators when N changes, preserving other parameters
@@ -151,10 +151,10 @@ This document provides an actionable, dependency-ordered task list for implement
 
 ### Tasks
 
-- [ ] T040 [US3] [P] Implement render_educational_content function in src/aion/ui/education.py with explanation for "oscillator" term per spec.md requirements
-- [ ] T041 [US3] [P] Implement explanation for "phase" term in src/aion/ui/education.py connecting to unit circle visualization
-- [ ] T042 [US3] [P] Implement explanation for "resonance" term in src/aion/ui/education.py connecting to resonance index chart and synchronization behavior
-- [ ] T043 [US3] [P] Implement explanation for "attunement" term in src/aion/ui/education.py connecting to clustering behavior in visualization
+- [ ] T040 [P] [US3] Implement render_educational_content function in src/aion/ui/education.py with explanation for "oscillator" term per spec.md requirements
+- [ ] T041 [P] [US3] Implement explanation for "phase" term in src/aion/ui/education.py connecting to unit circle visualization
+- [ ] T042 [P] [US3] Implement explanation for "resonance" term in src/aion/ui/education.py connecting to resonance index chart and synchronization behavior
+- [ ] T043 [P] [US3] Implement explanation for "attunement" term in src/aion/ui/education.py connecting to clustering behavior in visualization
 - [ ] T044 [US3] Implement connections to broader concepts in src/aion/ui/education.py explaining how AION relates to synchronization, energy minimization, and neuro-symbolic binding per spec.md
 - [ ] T045 [US3] Implement educational content display in src/app.py using st.expander() or st.sidebar() for collapsible content, ensuring concise and accessible language
 - [ ] T046 [US3] Implement integration test for educational content in tests/integration/ verifying all four key terms are displayed and accessible
@@ -172,9 +172,9 @@ This document provides an actionable, dependency-ordered task list for implement
 - [ ] T047 Implement error handling in all modules to raise ValueError for invalid inputs, TypeError for incorrect types, and handle edge cases gracefully (N=1, K=0, very high K, etc.) per contracts/module-interfaces.md
 - [ ] T048 Implement performance optimization in src/aion/models/simulation.py ensuring update() completes in < 100ms for N=100 oscillators, and limit resonance_history size for large N
 - [ ] T049 Implement edge case handling in src/app.py for rapid parameter changes, very long simulation runs, maximum animation speed, and numerical stability with high coupling strength
-- [ ] T052 [P] Implement comprehensive edge case validation matrix per spec.md:L77-88 covering all documented edge cases: K=0 (independent rotation), K very high (numerical instability), N=1 (no synchronization), N=1000 (performance), Δt=0/negative (invalid values), maximum animation speed (smooth updates), rapid parameter changes (responsive handling), very long runs (stability), pause behavior (frozen state), reset behavior (reinitialization)
-- [ ] T050 Update README.md with complete usage instructions, parameter descriptions, and troubleshooting guide
-- [ ] T051 Run full test suite (pytest tests/) and verify all acceptance scenarios from spec.md are met, including edge cases
+- [ ] T050 Implement comprehensive edge case validation matrix per spec.md:L77-88 covering all documented edge cases: K=0 (independent rotation), K very high (numerical instability), N=1 (no synchronization), N=1000 (performance), Δt=0/negative (invalid values), maximum animation speed (smooth updates), rapid parameter changes (responsive handling), very long runs (stability), pause behavior (frozen state), reset behavior (reinitialization)
+- [ ] T051 Update README.md with complete usage instructions, parameter descriptions, and troubleshooting guide
+- [ ] T052 Run full test suite (pytest tests/) and verify all acceptance scenarios from spec.md are met, including edge cases
 
 ---
 
@@ -266,4 +266,3 @@ Phase 1 (Setup)
 - **US3**: Locate and read all four key term explanations
 
 **Next Steps**: Begin with Phase 1 (Setup) tasks, proceeding sequentially through phases. Within each phase, execute parallel tasks simultaneously where marked.
-
