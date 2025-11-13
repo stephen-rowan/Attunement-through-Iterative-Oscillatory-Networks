@@ -8,13 +8,13 @@
 
 This document provides an actionable, dependency-ordered task list for implementing the AION Educational Simulation. Tasks are organized by user story to enable independent implementation and testing. Each task is specific enough that an LLM can complete it without additional context.
 
-**Total Tasks**: 51  
+**Total Tasks**: 52  
 **User Story Breakdown**:
 - Setup & Foundational: 16 tasks
 - User Story 1 (P1): 15 tasks
 - User Story 2 (P2): 8 tasks
 - User Story 3 (P3): 7 tasks
-- Polish & Cross-Cutting: 5 tasks
+- Polish & Cross-Cutting: 6 tasks
 
 **MVP Scope**: User Story 1 (P1) - Run and Observe AION Simulation
 
@@ -172,6 +172,7 @@ This document provides an actionable, dependency-ordered task list for implement
 - [ ] T047 Implement error handling in all modules to raise ValueError for invalid inputs, TypeError for incorrect types, and handle edge cases gracefully (N=1, K=0, very high K, etc.) per contracts/module-interfaces.md
 - [ ] T048 Implement performance optimization in src/aion/models/simulation.py ensuring update() completes in < 100ms for N=100 oscillators, and limit resonance_history size for large N
 - [ ] T049 Implement edge case handling in src/app.py for rapid parameter changes, very long simulation runs, maximum animation speed, and numerical stability with high coupling strength
+- [ ] T052 [P] Implement comprehensive edge case validation matrix per spec.md:L77-88 covering all documented edge cases: K=0 (independent rotation), K very high (numerical instability), N=1 (no synchronization), N=1000 (performance), Δt=0/negative (invalid values), maximum animation speed (smooth updates), rapid parameter changes (responsive handling), very long runs (stability), pause behavior (frozen state), reset behavior (reinitialization)
 - [ ] T050 Update README.md with complete usage instructions, parameter descriptions, and troubleshooting guide
 - [ ] T051 Run full test suite (pytest tests/) and verify all acceptance scenarios from spec.md are met, including edge cases
 
@@ -248,12 +249,12 @@ Phase 1 (Setup)
 
 ## Summary
 
-**Total Tasks**: 51  
+**Total Tasks**: 52  
 **Setup & Foundational**: 16 tasks  
 **User Story 1 (P1)**: 15 tasks  
 **User Story 2 (P2)**: 8 tasks  
 **User Story 3 (P3)**: 7 tasks  
-**Polish & Cross-Cutting**: 5 tasks  
+**Polish & Cross-Cutting**: 6 tasks  
 
 **Parallel Opportunities**: 3 major parallel groups identified across phases
 

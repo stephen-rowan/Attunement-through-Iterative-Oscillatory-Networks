@@ -81,7 +81,7 @@ src/
 │   │   ├── oscillator.py      # Oscillator entity and phase update logic
 │   │   └── simulation.py     # Simulation state and Kuramoto equations
 │   ├── visualization/
-│   │   ├── __init__.py
+│   │   ├── __init__.py        # VisualizationData dataclass (per data-model.md)
 │   │   ├── unit_circle.py    # Unit circle plot visualization
 │   │   └── resonance_chart.py # Resonance index time series chart
 │   └── ui/

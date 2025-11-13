@@ -95,17 +95,17 @@ A learner encounters unfamiliar terms like "oscillator," "phase," "resonance," o
 - **FR-002**: System MUST update oscillator phases iteratively based on coupling interactions between oscillators using the standard Kuramoto equation: dθ_j/dt = ω_j + (K/N) Σ sin(θ_k - θ_j), where θ_j is the phase of oscillator j, ω_j is its intrinsic frequency, K is coupling strength, and N is the number of oscillators
 - **FR-003**: System MUST calculate and display a resonance index (R) that measures the degree of phase synchronization using the standard Kuramoto order parameter: R = |(1/N) Σ e^(iθ_j)|
 - **FR-004**: System MUST provide a dynamic 2D unit-circle visualization showing oscillators as points rotating around a circle
-- **FR-005**: System MUST update the unit-circle visualization in real-time as oscillators move and cluster
-- **FR-006**: System MUST provide a real-time line chart showing the resonance index (R) over time
+- **FR-005**: System MUST update the unit-circle visualization in real-time as oscillators move and cluster (update rate: at least 10 frames per second per SC-003)
+- **FR-006**: System MUST provide a real-time line chart showing the resonance index (R) over time (update rate: at least 10 frames per second per SC-003)
 - **FR-007**: System MUST allow users to adjust the number of oscillators (N) with immediate effect on the simulation
 - **FR-008**: System MUST allow users to adjust coupling strength (K) with immediate effect on synchronization behavior
 - **FR-009**: System MUST allow users to adjust time step (Δt) for the simulation calculations
 - **FR-010**: System MUST allow users to adjust animation speed for visual updates
 - **FR-011**: System MUST provide concise educational explanations for the terms "oscillator," "phase," "resonance," and "attunement"
 - **FR-012**: System MUST explain how AION dynamics relate to synchronization, energy minimization, and neuro-symbolic binding concepts
-- **FR-013**: System MUST maintain responsive interactivity - parameter changes must reflect in visualizations within 1 second
-- **FR-014**: System MUST ensure visualizations update smoothly without noticeable lag or stuttering
-- **FR-015**: System MUST initialize oscillators with random phases (uniformly distributed on [0, 2π]) and intrinsic frequencies (uniformly distributed over a specified range, e.g., [-1, 1] or [0, 2]) when the simulation starts
+- **FR-013**: System MUST maintain responsive interactivity - parameter changes must reflect in visualizations within 1 second (per SC-002)
+- **FR-014**: System MUST ensure visualizations update smoothly without noticeable lag or stuttering (at least 10 frames per second per SC-003)
+- **FR-015**: System MUST initialize oscillators with random phases (uniformly distributed on [0, 2π]) and intrinsic frequencies (uniformly distributed over a specified range; default: [-1, 1] per plan.md) when the simulation starts
 - **FR-016**: System MUST handle parameter value validation to prevent invalid inputs (e.g., negative numbers, zero for certain parameters)
 - **FR-017**: System MUST provide a pause/resume control that allows users to stop and resume simulation execution
 - **FR-018**: System MUST provide a reset control that restarts the simulation with current parameter values, reinitializing oscillators and clearing the resonance index history
